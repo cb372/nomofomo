@@ -1,0 +1,37 @@
+<html><head>
+<title>Example nomofomo page</title>
+<style type="text/css">
+	div#bubblegraph {
+		width: 90%;
+		left: 5%;
+		height: 200px;
+		border: 1px solid red;
+	}
+	svg#bubblegraph_svg {
+		width: 100%;
+		height: 100%;
+	}
+
+</style>
+</head>
+<body>
+<h1>NoMoFoMo</h1>
+<div id="bubblegraph"><svg id="bubblegraph_svg"></svg>
+</div>
+</body>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+	var dummyAllData = [{"importance": 8, "text": "test", "id": "id00", "time": 1424131200}, {"importance": 5, "text": "test", "id": "id01", "time": 1424152800}, {"importance": 7, "text": "test", "id": "id02", "time": 1424174400}, {"importance": 3, "text": "test", "id": "id03", "time": 1424196000}, {"importance": 9, "text": "test", "id": "id04", "time": 1424217600}, {"importance": 8, "text": "test", "id": "id05", "time": 1424239200}, {"importance": 6, "text": "test", "id": "id06", "time": 1424260800}, {"importance": 7, "text": "test", "id": "id07", "time": 1424282400}, {"importance": 5, "text": "test", "id": "id08", "time": 1424304000}, {"importance": 8, "text": "test", "id": "id09", "time": 1424325600}, {"importance": 8, "text": "test", "id": "id0a", "time": 1424347200}, {"importance": 0, "text": "test", "id": "id0b", "time": 1424368800}, {"importance": 2, "text": "test", "id": "id0c", "time": 1424390400}, {"importance": 5, "text": "test", "id": "id0d", "time": 1424412000}, {"importance": 0, "text": "test", "id": "id0e", "time": 1424433600}, {"importance": 1, "text": "test", "id": "id0f", "time": 1424455200}, {"importance": 4, "text": "test", "id": "id10", "time": 1424476800}, {"importance": 9, "text": "test", "id": "id11", "time": 1424498400}, {"importance": 10, "text": "test", "id": "id12", "time": 1424520000}, {"importance": 1, "text": "test", "id": "id13", "time": 1424541600}, {"importance": 7, "text": "test", "id": "id14", "time": 1424563200}, {"importance": 7, "text": "test", "id": "id15", "time": 1424584800}, {"importance": 4, "text": "test", "id": "id16", "time": 1424606400}, {"importance": 2, "text": "test", "id": "id17", "time": 1424628000}, {"importance": 7, "text": "test", "id": "id18", "time": 1424649600}, {"importance": 6, "text": "test", "id": "id19", "time": 1424671200}, {"importance": 0, "text": "test", "id": "id1a", "time": 1424692800}, {"importance": 1, "text": "test", "id": "id1b", "time": 1424714400}, {"importance": 2, "text": "test", "id": "id1c", "time": 1424736000}, {"importance": 10, "text": "test", "id": "id1d", "time": 1424757600}, {"importance": 9, "text": "test", "id": "id1e", "time": 1424779200}, {"importance": 9, "text": "test", "id": "id1f", "time": 1424800800}, {"importance": 10, "text": "test", "id": "id20", "time": 1424822400}, {"importance": 2, "text": "test", "id": "id21", "time": 1424844000}, {"importance": 1, "text": "test", "id": "id22", "time": 1424865600}, {"importance": 10, "text": "test", "id": "id23", "time": 1424887200}, {"importance": 5, "text": "test", "id": "id24", "time": 1424908800}, {"importance": 9, "text": "test", "id": "id25", "time": 1424930400}, {"importance": 6, "text": "test", "id": "id26", "time": 1424952000}, {"importance": 5, "text": "test", "id": "id27", "time": 1424973600}];
+
+	var showRange = function(from, to) {
+		var data = dummyAllData.filter(function(v){return (v.time>=from && v.time<=to);});
+		var svg = d3.select("svg#bubblegraph_svg");
+		svg.selectAll("circle").data(data).enter()
+			.append("circle")
+				.attr("cx", function(d,i){return i*20;})
+				.attr("cy", 100)
+				.attr("r", function(d){return d.importance*4});
+	}
+	showRange(1424131200, 1424973600);
+</script>
+</html>
