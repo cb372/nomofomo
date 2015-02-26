@@ -2,14 +2,19 @@
 <title>Example nomofomo page</title>
 <style type="text/css">
 	div#bubblegraph {
-		width: 90%;
-		left: 5%;
+		width: 600px;
+		left: 0px;
 		height: 200px;
 		border: 1px solid red;
+		position:relative;
 	}
 	svg#bubblegraph_svg {
 		width: 100%;
 		height: 100%;
+	}
+
+	svg#bubblegraph_svg text.marker {
+		font-size: 8px;
 	}
 	#bubbleinfo {
 		background-color: #eee;
@@ -20,11 +25,24 @@
 		font-size: 10px;
 	}
 
+	div#bubblegraph_zoom {
+		position: absolute;
+		left: 10px;
+		top: 10px;
+			
+	}
+
+
 </style>
 </head>
 <body>
 <h1>NoMoFoMo</h1>
-<div id="bubblegraph"><svg id="bubblegraph_svg"></svg>
+<div id="bubblegraph">
+	<svg id="bubblegraph_svg"></svg>
+	<div id="bubblegraph_zoom">
+		<div id="bubblegraph_zoom_in" class="zoombutton">+</div>
+		<div id="bubblegraph_zoom_out" class="zoombutton">-</div>
+	</div>
 </div>
 <div id="bubbleinfo">
 	<p id="bubbleinfo__title">TITLE</p>
@@ -35,6 +53,42 @@
 	var dummyAllData = [{"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#e5892d", "time": 1424131200, "id": "id00"}, {"title": "Pauline Fisk obituary", "importance": 5, "text": "test", "colour": "#e52d3b", "time": 1424152800, "id": "id01"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 8, "text": "test", "colour": "#aa2de5", "time": 1424174400, "id": "id02"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 4, "text": "test", "colour": "#2d53e5", "time": 1424196000, "id": "id03"}, {"title": "Pauline Fisk obituary", "importance": 3, "text": "test", "colour": "#3be52d", "time": 1424217600, "id": "id04"}, {"title": "Pauline Fisk obituary", "importance": 9, "text": "test", "colour": "#e5b22d", "time": 1424239200, "id": "id05"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 10, "text": "test", "colour": "#2de5d2", "time": 1424260800, "id": "id06"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 4, "text": "test", "colour": "#2d6ee5", "time": 1424282400, "id": "id07"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 10, "text": "test", "colour": "#d9e52d", "time": 1424304000, "id": "id08"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 8, "text": "test", "colour": "#e12de5", "time": 1424325600, "id": "id09"}, {"title": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "importance": 0, "text": "test", "colour": "#2dcae5", "time": 1424347200, "id": "id0a"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 2, "text": "test", "colour": "#2db8e5", "time": 1424368800, "id": "id0b"}, {"title": "Pauline Fisk obituary", "importance": 4, "text": "test", "colour": "#2de553", "time": 1424390400, "id": "id0c"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 9, "text": "test", "colour": "#2de53f", "time": 1424412000, "id": "id0d"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 4, "text": "test", "colour": "#3ce52d", "time": 1424433600, "id": "id0e"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 8, "text": "test", "colour": "#e52dca", "time": 1424455200, "id": "id0f"}, {"title": "Pauline Fisk obituary", "importance": 6, "text": "test", "colour": "#b92de5", "time": 1424476800, "id": "id10"}, {"title": "Pauline Fisk obituary", "importance": 4, "text": "test", "colour": "#2de555", "time": 1424498400, "id": "id11"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 3, "text": "test", "colour": "#2d69e5", "time": 1424520000, "id": "id12"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 1, "text": "test", "colour": "#2d90e5", "time": 1424541600, "id": "id13"}, {"title": "Net neutrality: FCC votes on the future of the internet", "importance": 0, "text": "test", "colour": "#54e52d", "time": 1424563200, "id": "id14"}, {"title": "Arsenal must get back to basics after Champions League lesson from Monaco | Jonathan Wilson", "importance": 9, "text": "test", "colour": "#e52d75", "time": 1424584800, "id": "id15"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 10, "text": "test", "colour": "#e5c12d", "time": 1424606400, "id": "id16"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 0, "text": "test", "colour": "#e52d80", "time": 1424628000, "id": "id17"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 10, "text": "test", "colour": "#2d42e5", "time": 1424649600, "id": "id18"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#e52dc3", "time": 1424671200, "id": "id19"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#2d59e5", "time": 1424692800, "id": "id1a"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 4, "text": "test", "colour": "#2d95e5", "time": 1424714400, "id": "id1b"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 7, "text": "test", "colour": "#2dd3e5", "time": 1424736000, "id": "id1c"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 3, "text": "test", "colour": "#e5982d", "time": 1424757600, "id": "id1d"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 0, "text": "test", "colour": "#2de558", "time": 1424779200, "id": "id1e"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 10, "text": "test", "colour": "#2d4ce5", "time": 1424800800, "id": "id1f"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 10, "text": "test", "colour": "#e57b2d", "time": 1424822400, "id": "id20"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 10, "text": "test", "colour": "#5a2de5", "time": 1424844000, "id": "id21"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 9, "text": "test", "colour": "#9e2de5", "time": 1424865600, "id": "id22"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 5, "text": "test", "colour": "#2d79e5", "time": 1424887200, "id": "id23"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 0, "text": "test", "colour": "#bee52d", "time": 1424908800, "id": "id24"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 8, "text": "test", "colour": "#2dc3e5", "time": 1424930400, "id": "id25"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#e5bc2d", "time": 1424952000, "id": "id26"}, {"title": "Pauline Fisk obituary", "importance": 6, "text": "test", "colour": "#732de5", "time": 1424973600, "id": "id27"}];
 
 	var showRange = function(from, to) {
+		var fromDate = new Date(from*1000);
+		var toDate = new Date(to*1000);
+		var pixelsPerSec = 600.0/(to-from);
+		var markerGap = 50
+		var secsPerMarkerGap = ((to-from)/600.0)*markerGap;
+
+		var startMarker = from
+		var markerIncrement = 1
+		var markerFmt = null
+		var monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		// choose the right scale for markers
+		if ((secsPerMarkerGap) <= 3600) {
+			// 1 hour
+			markerIncrement = 3600;
+			markerFmt = function(d){ return d.getHours()+":00"; }
+		} else if ((secsPerMarkerGap <= 86400)) {
+			markerIncrement = 86400;
+			markerFmt = function(d){ return d.getDate()+" "+monthName[d.getMonth()]; }
+		} else if ((secsPerMarkerGap <= 2628000)) { // roughly a month
+			markerIncrement = 2628000
+			markerFmt = function(d){ return monthName[d.getMonth()]+" "+d.getFullYear(); }
+		} else {
+			markerIncrement = 31536000 
+			// TODO: multiply by 10 until it's wide enough
+			markerFmt = function(d){ return d.getFullYear()+"" }
+		}
+		startMarker = Math.ceil((from-1)/markerIncrement)*markerIncrement
+		//console.log("markerFmt(from) = "+markerFmt(from))
+
+
+		var markers = [];
+		for(var i=startMarker; i <= to; i += markerIncrement) {
+			markers.push(i);
+		}
+		console.log("markers = "+markers);
+
 		var data = dummyAllData.filter(function(v){return (v.time>=from && v.time<=to);});
 		var svg = d3.select("svg#bubblegraph_svg");
 		svg.selectAll("circle").data(data).enter()
@@ -55,6 +109,22 @@
 					d3.select(this).transition().attr("r", d.importance*4);
 				})
 				;
+		svg.selectAll("rect.marker").data(markers).enter()
+			.append("rect")
+				.attr("class", "marker")
+				.attr("x", function(d,i) { return (d-from)*pixelsPerSec; })
+				.attr("y", 95)
+				.attr("width", 2)
+				.attr("height", 10)
+				.attr("fill", "#777")
+				.attr("id", function(d){return "mkr"+d;});
+		svg.selectAll("text.marker").data(markers).enter()
+			.append("text")
+				.attr("class", "marker")
+				.attr("dx", function(d,i) { return (d-from)*pixelsPerSec; })
+				.attr("dy", 110)
+				.text(function(d){return markerFmt(new Date(d*1000)); })
+
 	}
 	showRange(1424131200, 1424973600);
 </script>
