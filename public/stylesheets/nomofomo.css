@@ -1,12 +1,9 @@
-h1 {
-  font-family: 'Helvetica';
-}
+
 div#bubblegraph {
   width: 1200px;
   left: 0px;
   height: 400px;
   position:relative;
-  border:1px dotted black;
 }
 svg#bubblegraph_svg {
   width: 100%;
@@ -14,7 +11,7 @@ svg#bubblegraph_svg {
 }
 
 svg#bubblegraph_svg text.marker {
-  font-size: 8px;
+  font-size: 16px;
 }
 #bubbleinfo {
   background-color: rgba(230,230,230,0.5);

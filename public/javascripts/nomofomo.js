@@ -37,6 +37,7 @@ BubbleGraphObject.prototype.zoomToRange = function(from, to) {
   var pixelsPerNanosec = 1100.0/(to-from);
   var markerGap = 50
   var nanosecsPerMarkerGap = ((to-from)/600.0)*markerGap;
+  var centresHeight = 200;
 
   var startMarker = from
   var markerIncrement = 1
@@ -75,7 +76,7 @@ BubbleGraphObject.prototype.zoomToRange = function(from, to) {
     .attr("r", function(d){return d.importance*8;})
     .attr("fill", function(d){return '#' + Math.round(d.importance).toString(10) +'ff';})
     .attr("opacity", 0.7)
-    .attr("cy", 100)
+    .attr("cy", centresHeight)
     .on("mouseover", function(d, i){
       var cr = svg[0][0].getBoundingClientRect();
       d3.select(this).transition().attr("r", d.importance*14);
@@ -86,17 +87,17 @@ BubbleGraphObject.prototype.zoomToRange = function(from, to) {
       d3.select("#bubbleinfo__comments").text(d.commentCount);
       d3.select("#bubbleinfo__fb").text(d.facebookShareCount);
       d3.select("#bubbleinfo__twitter").text(d.twitterShareCount);
-      //d3.select("#bubbleinfo__thumb").src(d.thumbnail);
+      d3.select("#bubbleinfo__thumb").attr("src", d.thumbnail);
       infobox.style("display", "block")
-        //.style("left", (cr.left + i*30 - 10))
         .style("left", (d.publishedAt-from)*pixelsPerNanosec - 40)
 
-        .style("top", cr.top+200);
+        .style("top", cr.top+centresHeight+80);
       infobox.transition().style("opacity", "1.0");
     })
     .on("mouseout", function(d, i){
       d3.select(this).transition().attr("r", d.importance*12);
       var infobox = d3.select("#bubbleinfo");
+      d3.select("#bubbleinfo__thumb").attr("src", "");
       infobox.transition().style("opacity", "0.0");
       //infobox.style("display", "none")
     })
@@ -108,19 +109,6 @@ BubbleGraphObject.prototype.zoomToRange = function(from, to) {
     .attr("r", function(d){return d.importance*12;})
     .attr("fill", function(d){return '#0' + Math.round(d.importance * 1.6 -1).toString(16) +'7';});
   circles.exit().remove();
-  var dashes = this.svg.selectAll("rect.marker").data(markers, function(d){return d;});
-  dashes.enter()
-    .append("rect")
-      .attr("class", "marker")
-      .attr("x", function(d,i) { return (d-from)*pixelsPerNanosec; })
-      .attr("y", 180)
-      .attr("width", 2)
-      .attr("height", 10)
-      .attr("fill", "#777")
-      .attr("id", function(d){return "mkr"+d;});
-  dashes.transition().duration(300)
-    .attr("x", function(d,i) { return (d-from)*pixelsPerNanosec; });			
-  dashes.exit().remove();
 
   var labels = this.svg.selectAll("text.marker").data(markers, function(d){return d;});
   labels.enter()
@@ -128,7 +116,7 @@ BubbleGraphObject.prototype.zoomToRange = function(from, to) {
       .attr("class", "marker")
       .attr("dx", function(d,i) { return (d-from)*pixelsPerNanosec; })
       .text(function(d){return markerFmt(new Date(d)); })
-      .attr("dy", 190);
+      .attr("dy", centresHeight + 4);
   labels.transition().duration(300)
       .attr("dx", function(d,i) { return (d-from)*pixelsPerNanosec; });
   labels.exit().remove();

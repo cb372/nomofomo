@@ -1,9 +1,18 @@
 <html><head>
-<title>Example nomofomo page</title>
+<title>Nomofomo page</title>
 <link rel="stylesheet" type="text/css" href="/stylesheets/nomofomo.css" />
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
 </head>
 <body>
-<h1>NoMoFoMo</h1>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+  	<a class="navbar-brand" href="#">NoMoFoMo</a>
+  	<ul class="nav navbar-nav">
+  		<li><a href="/">Top 20</a></li>
+  		<li><a href="/isis.html">Isis</a></li>
+  	</ul>
+  </div>
+</nav>
 <div id="bubblegraph">
 	<svg id="bubblegraph_svg"></svg>
 	<div id="bubblegraph_zoom">
@@ -12,14 +21,14 @@
 	</div>
 </div>
 <div id="bubbleinfo">
-	<!-- <img id="bubbleinfo__thumb" />  -->
+	<img id="bubbleinfo__thumb" src=""/>
 	<p id="bubbleinfo__title">TITLE</p>
 	<p class="stats">
-		<span id="bubbleinfo__views"></span> &lt;o&gt;
-		<span id="bubbleinfo__comments"></span> cmt
-		<span id="bubbleinfo__likes"></span> l
-		<span id="bubbleinfo__fb"></span> fb
-		<span id="bubbleinfo__twitter"></span> t
+		Page Views <span id="bubbleinfo__views"></span><br/>
+		Comments <span id="bubbleinfo__comments"></span><br/>
+		Facebook Likes <span id="bubbleinfo__likes"></span><br/>
+		Facebook Shares <span id="bubbleinfo__fb"></span><br/>
+		Twitter shares <span id="bubbleinfo__twitter"></span><br/>
 	</p>
 </div>
 </body>
