@@ -91,9 +91,9 @@ BubbleGraphObject.prototype.refresh = function() {
 
 BubbleGraphObject.prototype.zoomIn = function() {
   var span = this.to - this.from, midpoint = (this.from + this.to)/2;
-  var nfrom = midpoint - span/4;
-  var nto = midpoint + span/4;
-  this.zoomToRange(nfrom, nto);
+  var nfrom = midpoint;
+  var nto = this.to;
+  this.zoomToRange(nfrom, this.to);
    
   var self = this;
   $.ajax(ajaxUrl + '?from=' + nfrom + '&to=' + nto, {
@@ -107,8 +107,8 @@ BubbleGraphObject.prototype.zoomIn = function() {
 
 BubbleGraphObject.prototype.zoomOut = function() {
   var span = this.to - this.from, midpoint = (this.from + this.to)/2;
-  var nfrom = midpoint - span;
-  var nto = midpoint + span;
+  var nfrom = this.from - span;
+  var nto = this.to;
   this.zoomToRange(nfrom, nto)
    
   var self = this;
