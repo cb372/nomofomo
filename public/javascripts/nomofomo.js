@@ -20,7 +20,7 @@ BubbleGraphObject.prototype.refresh = function() {
   var to = this.to;
   var markers = this.markers;
   var markerFmt = this.markerFmt;
-  var pixelsPerNanosec = 1100.0/(to-from);
+  var pixelsPerNanosec = 900.0/(to-from);
   var centresHeight = 200;
 
   var data = this.data.filter(function(v){return (v.publishedAt>=from && v.publishedAt<=to);});
