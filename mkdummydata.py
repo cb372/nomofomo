@@ -23,4 +23,16 @@ def randcolour():
 	(r,g,b) = colorsys.hsv_to_rgb(random.random(), 0.8, 0.9)
 	return '#%02x%02x%02x'%(int(r*255), int(g*255), int(b*255))
 
-print(json.dumps([dict(id="id%02x"%i, colour=randcolour(), title=randtitle(), time=int(time.mktime((2015,2,17+i/4,(i%4)*6,0,0,0,0,0))), importance=random.randint(0,10), text="test") for i in range(40)]))
+print(json.dumps([dict(
+		url="id%02x"%i, 
+		colour=randcolour(), 
+		headline=randtitle(), 
+		publishedAt=int(time.mktime((2015,2,17+i/4,(i%4)*6,0,0,0,0,0))*1000), 
+		importance=random.randint(0,10), 
+		viewCount=random.randint(0,10000),
+		commentCount=random.randint(0,100),
+		facebookCommentCount=random.randint(0,100),
+		facebookLikeCount=random.randint(0,1000),
+		facebookShareCount=random.randint(0,200),
+		twitterShareCount=random.randint(0,500)
+	) for i in range(40)]))

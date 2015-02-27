@@ -21,9 +21,10 @@
 		padding: 10px;
 		display: none;
 		position: absolute;
-		width: 120px;
+		width: 150px;
 		font-size: 10px;
 	}
+	#bubbleinfo .stats { font-size: 8px;}
 
 	div#bubblegraph_zoom {
 		position: absolute;
@@ -56,11 +57,18 @@
 </div>
 <div id="bubbleinfo">
 	<p id="bubbleinfo__title">TITLE</p>
+	<p class="stats">
+		<span id="bubbleinfo__views"></span> &lt;o&gt;
+		<span id="bubbleinfo__comments"></span> cmt
+		<span id="bubbleinfo__likes"></span> l
+		<span id="bubbleinfo__fb"></span> fb
+		<span id="bubbleinfo__twitter"></span> t
+	</p>
 </div>
 </body>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script type="text/javascript">
-	var dummyAllData = [{"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#e5892d", "time": 1424131200, "id": "id00"}, {"title": "Pauline Fisk obituary", "importance": 5, "text": "test", "colour": "#e52d3b", "time": 1424152800, "id": "id01"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 8, "text": "test", "colour": "#aa2de5", "time": 1424174400, "id": "id02"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 4, "text": "test", "colour": "#2d53e5", "time": 1424196000, "id": "id03"}, {"title": "Pauline Fisk obituary", "importance": 3, "text": "test", "colour": "#3be52d", "time": 1424217600, "id": "id04"}, {"title": "Pauline Fisk obituary", "importance": 9, "text": "test", "colour": "#e5b22d", "time": 1424239200, "id": "id05"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 10, "text": "test", "colour": "#2de5d2", "time": 1424260800, "id": "id06"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 4, "text": "test", "colour": "#2d6ee5", "time": 1424282400, "id": "id07"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 10, "text": "test", "colour": "#d9e52d", "time": 1424304000, "id": "id08"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 8, "text": "test", "colour": "#e12de5", "time": 1424325600, "id": "id09"}, {"title": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "importance": 0, "text": "test", "colour": "#2dcae5", "time": 1424347200, "id": "id0a"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 2, "text": "test", "colour": "#2db8e5", "time": 1424368800, "id": "id0b"}, {"title": "Pauline Fisk obituary", "importance": 4, "text": "test", "colour": "#2de553", "time": 1424390400, "id": "id0c"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 9, "text": "test", "colour": "#2de53f", "time": 1424412000, "id": "id0d"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 4, "text": "test", "colour": "#3ce52d", "time": 1424433600, "id": "id0e"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 8, "text": "test", "colour": "#e52dca", "time": 1424455200, "id": "id0f"}, {"title": "Pauline Fisk obituary", "importance": 6, "text": "test", "colour": "#b92de5", "time": 1424476800, "id": "id10"}, {"title": "Pauline Fisk obituary", "importance": 4, "text": "test", "colour": "#2de555", "time": 1424498400, "id": "id11"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 3, "text": "test", "colour": "#2d69e5", "time": 1424520000, "id": "id12"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 1, "text": "test", "colour": "#2d90e5", "time": 1424541600, "id": "id13"}, {"title": "Net neutrality: FCC votes on the future of the internet", "importance": 0, "text": "test", "colour": "#54e52d", "time": 1424563200, "id": "id14"}, {"title": "Arsenal must get back to basics after Champions League lesson from Monaco | Jonathan Wilson", "importance": 9, "text": "test", "colour": "#e52d75", "time": 1424584800, "id": "id15"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 10, "text": "test", "colour": "#e5c12d", "time": 1424606400, "id": "id16"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 0, "text": "test", "colour": "#e52d80", "time": 1424628000, "id": "id17"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 10, "text": "test", "colour": "#2d42e5", "time": 1424649600, "id": "id18"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#e52dc3", "time": 1424671200, "id": "id19"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#2d59e5", "time": 1424692800, "id": "id1a"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 4, "text": "test", "colour": "#2d95e5", "time": 1424714400, "id": "id1b"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 7, "text": "test", "colour": "#2dd3e5", "time": 1424736000, "id": "id1c"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 3, "text": "test", "colour": "#e5982d", "time": 1424757600, "id": "id1d"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 0, "text": "test", "colour": "#2de558", "time": 1424779200, "id": "id1e"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 10, "text": "test", "colour": "#2d4ce5", "time": 1424800800, "id": "id1f"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 10, "text": "test", "colour": "#e57b2d", "time": 1424822400, "id": "id20"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 10, "text": "test", "colour": "#5a2de5", "time": 1424844000, "id": "id21"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 9, "text": "test", "colour": "#9e2de5", "time": 1424865600, "id": "id22"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 5, "text": "test", "colour": "#2d79e5", "time": 1424887200, "id": "id23"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 0, "text": "test", "colour": "#bee52d", "time": 1424908800, "id": "id24"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 8, "text": "test", "colour": "#2dc3e5", "time": 1424930400, "id": "id25"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#e5bc2d", "time": 1424952000, "id": "id26"}, {"title": "Pauline Fisk obituary", "importance": 6, "text": "test", "colour": "#732de5", "time": 1424973600, "id": "id27"}];
+	var dummyAllData = [{"facebookShareCount": 38, "viewCount": 9428, "importance": 3, "colour": "#7d2de5", "twitterShareCount": 155, "commentCount": 99, "headline": "Milan fashion week sees brands offer a more restrained glamour", "publishedAt": 1424131200000, "url": "id00", "facebookLikeCount": 785, "facebookCommentCount": 14}, {"facebookShareCount": 80, "viewCount": 2753, "importance": 8, "colour": "#2d34e5", "twitterShareCount": 419, "commentCount": 45, "headline": "Net neutrality: FCC votes on the future of the internet", "publishedAt": 1424152800000, "url": "id01", "facebookLikeCount": 659, "facebookCommentCount": 35}, {"facebookShareCount": 101, "viewCount": 9328, "importance": 2, "colour": "#e5562d", "twitterShareCount": 86, "commentCount": 43, "headline": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "publishedAt": 1424174400000, "url": "id02", "facebookLikeCount": 812, "facebookCommentCount": 87}, {"facebookShareCount": 45, "viewCount": 2302, "importance": 2, "colour": "#e52dcc", "twitterShareCount": 408, "commentCount": 30, "headline": "It Follows review - sexual dread fuels a modern horror classic", "publishedAt": 1424196000000, "url": "id03", "facebookLikeCount": 578, "facebookCommentCount": 0}, {"facebookShareCount": 3, "viewCount": 2341, "importance": 9, "colour": "#abe52d", "twitterShareCount": 51, "commentCount": 63, "headline": "Net neutrality: FCC votes on the future of the internet", "publishedAt": 1424217600000, "url": "id04", "facebookLikeCount": 798, "facebookCommentCount": 59}, {"facebookShareCount": 173, "viewCount": 8823, "importance": 5, "colour": "#2de55c", "twitterShareCount": 408, "commentCount": 18, "headline": "French police investigate mystery drone flights over central Paris", "publishedAt": 1424239200000, "url": "id05", "facebookLikeCount": 501, "facebookCommentCount": 36}, {"facebookShareCount": 189, "viewCount": 2120, "importance": 10, "colour": "#652de5", "twitterShareCount": 371, "commentCount": 82, "headline": "Net neutrality: FCC votes on the future of the internet", "publishedAt": 1424260800000, "url": "id06", "facebookLikeCount": 704, "facebookCommentCount": 63}, {"facebookShareCount": 65, "viewCount": 5022, "importance": 8, "colour": "#a7e52d", "twitterShareCount": 424, "commentCount": 60, "headline": "Arsenal must get back to basics after Champions League lesson from Monaco | Jonathan Wilson", "publishedAt": 1424282400000, "url": "id07", "facebookLikeCount": 726, "facebookCommentCount": 12}, {"facebookShareCount": 3, "viewCount": 8256, "importance": 0, "colour": "#2f2de5", "twitterShareCount": 416, "commentCount": 85, "headline": "It Follows review - sexual dread fuels a modern horror classic", "publishedAt": 1424304000000, "url": "id08", "facebookLikeCount": 425, "facebookCommentCount": 38}, {"facebookShareCount": 156, "viewCount": 2392, "importance": 9, "colour": "#2de593", "twitterShareCount": 97, "commentCount": 34, "headline": "Net neutrality: FCC votes on the future of the internet", "publishedAt": 1424325600000, "url": "id09", "facebookLikeCount": 461, "facebookCommentCount": 40}, {"facebookShareCount": 71, "viewCount": 9661, "importance": 1, "colour": "#e5b42d", "twitterShareCount": 322, "commentCount": 61, "headline": "Letter: Oliver Rackham's winning ways", "publishedAt": 1424347200000, "url": "id0a", "facebookLikeCount": 671, "facebookCommentCount": 98}, {"facebookShareCount": 57, "viewCount": 9474, "importance": 7, "colour": "#e59b2d", "twitterShareCount": 327, "commentCount": 48, "headline": "Patients should have right to choose where they die, says care inquiry", "publishedAt": 1424368800000, "url": "id0b", "facebookLikeCount": 720, "facebookCommentCount": 81}, {"facebookShareCount": 139, "viewCount": 4968, "importance": 3, "colour": "#2dd3e5", "twitterShareCount": 42, "commentCount": 73, "headline": "Net neutrality: FCC votes on the future of the internet", "publishedAt": 1424390400000, "url": "id0c", "facebookLikeCount": 541, "facebookCommentCount": 74}, {"facebookShareCount": 1, "viewCount": 56, "importance": 0, "colour": "#6ae52d", "twitterShareCount": 89, "commentCount": 35, "headline": "Milan fashion week sees brands offer a more restrained glamour", "publishedAt": 1424412000000, "url": "id0d", "facebookLikeCount": 290, "facebookCommentCount": 92}, {"facebookShareCount": 75, "viewCount": 2208, "importance": 9, "colour": "#2d90e5", "twitterShareCount": 187, "commentCount": 78, "headline": "Net neutrality: FCC votes on the future of the internet", "publishedAt": 1424433600000, "url": "id0e", "facebookLikeCount": 963, "facebookCommentCount": 93}, {"facebookShareCount": 174, "viewCount": 1875, "importance": 7, "colour": "#2de5d2", "twitterShareCount": 453, "commentCount": 56, "headline": "French police investigate mystery drone flights over central Paris", "publishedAt": 1424455200000, "url": "id0f", "facebookLikeCount": 200, "facebookCommentCount": 79}, {"facebookShareCount": 44, "viewCount": 7117, "importance": 2, "colour": "#e57d2d", "twitterShareCount": 81, "commentCount": 2, "headline": "It Follows review - sexual dread fuels a modern horror classic", "publishedAt": 1424476800000, "url": "id10", "facebookLikeCount": 183, "facebookCommentCount": 14}, {"facebookShareCount": 196, "viewCount": 6419, "importance": 10, "colour": "#2dcbe5", "twitterShareCount": 39, "commentCount": 81, "headline": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "publishedAt": 1424498400000, "url": "id11", "facebookLikeCount": 384, "facebookCommentCount": 97}, {"facebookShareCount": 111, "viewCount": 6949, "importance": 6, "colour": "#3d2de5", "twitterShareCount": 109, "commentCount": 41, "headline": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "publishedAt": 1424520000000, "url": "id12", "facebookLikeCount": 148, "facebookCommentCount": 76}, {"facebookShareCount": 60, "viewCount": 5358, "importance": 5, "colour": "#e52d67", "twitterShareCount": 242, "commentCount": 97, "headline": "Pauline Fisk obituary", "publishedAt": 1424541600000, "url": "id13", "facebookLikeCount": 887, "facebookCommentCount": 6}, {"facebookShareCount": 10, "viewCount": 9718, "importance": 0, "colour": "#3ae52d", "twitterShareCount": 100, "commentCount": 68, "headline": "It Follows review - sexual dread fuels a modern horror classic", "publishedAt": 1424563200000, "url": "id14", "facebookLikeCount": 821, "facebookCommentCount": 74}, {"facebookShareCount": 59, "viewCount": 4264, "importance": 6, "colour": "#e5632d", "twitterShareCount": 307, "commentCount": 81, "headline": "Pauline Fisk obituary", "publishedAt": 1424584800000, "url": "id15", "facebookLikeCount": 215, "facebookCommentCount": 71}, {"facebookShareCount": 137, "viewCount": 4559, "importance": 0, "colour": "#2d31e5", "twitterShareCount": 173, "commentCount": 71, "headline": "Patients should have right to choose where they die, says care inquiry", "publishedAt": 1424606400000, "url": "id16", "facebookLikeCount": 369, "facebookCommentCount": 2}, {"facebookShareCount": 103, "viewCount": 5720, "importance": 10, "colour": "#31e52d", "twitterShareCount": 235, "commentCount": 42, "headline": "Patients should have right to choose where they die, says care inquiry", "publishedAt": 1424628000000, "url": "id17", "facebookLikeCount": 685, "facebookCommentCount": 94}, {"facebookShareCount": 139, "viewCount": 3763, "importance": 2, "colour": "#2de597", "twitterShareCount": 86, "commentCount": 36, "headline": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "publishedAt": 1424649600000, "url": "id18", "facebookLikeCount": 523, "facebookCommentCount": 77}, {"facebookShareCount": 78, "viewCount": 9320, "importance": 8, "colour": "#2d97e5", "twitterShareCount": 261, "commentCount": 29, "headline": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "publishedAt": 1424671200000, "url": "id19", "facebookLikeCount": 957, "facebookCommentCount": 6}, {"facebookShareCount": 80, "viewCount": 6634, "importance": 7, "colour": "#2d6fe5", "twitterShareCount": 245, "commentCount": 98, "headline": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "publishedAt": 1424692800000, "url": "id1a", "facebookLikeCount": 235, "facebookCommentCount": 43}, {"facebookShareCount": 25, "viewCount": 385, "importance": 10, "colour": "#3e2de5", "twitterShareCount": 128, "commentCount": 92, "headline": "Patients should have right to choose where they die, says care inquiry", "publishedAt": 1424714400000, "url": "id1b", "facebookLikeCount": 785, "facebookCommentCount": 62}, {"facebookShareCount": 31, "viewCount": 7943, "importance": 1, "colour": "#d02de5", "twitterShareCount": 115, "commentCount": 88, "headline": "Arsenal must get back to basics after Champions League lesson from Monaco | Jonathan Wilson", "publishedAt": 1424736000000, "url": "id1c", "facebookLikeCount": 957, "facebookCommentCount": 43}, {"facebookShareCount": 54, "viewCount": 7215, "importance": 7, "colour": "#2dd2e5", "twitterShareCount": 83, "commentCount": 4, "headline": "Net neutrality: FCC votes on the future of the internet", "publishedAt": 1424757600000, "url": "id1d", "facebookLikeCount": 608, "facebookCommentCount": 82}, {"facebookShareCount": 128, "viewCount": 52, "importance": 1, "colour": "#e52d5c", "twitterShareCount": 345, "commentCount": 48, "headline": "Milan fashion week sees brands offer a more restrained glamour", "publishedAt": 1424779200000, "url": "id1e", "facebookLikeCount": 523, "facebookCommentCount": 46}, {"facebookShareCount": 64, "viewCount": 1442, "importance": 0, "colour": "#2da4e5", "twitterShareCount": 101, "commentCount": 0, "headline": "Coutts bank under investigation over Swiss tax evasion", "publishedAt": 1424800800000, "url": "id1f", "facebookLikeCount": 551, "facebookCommentCount": 46}, {"facebookShareCount": 48, "viewCount": 231, "importance": 0, "colour": "#2de5c6", "twitterShareCount": 137, "commentCount": 38, "headline": "Letter: Oliver Rackham's winning ways", "publishedAt": 1424822400000, "url": "id20", "facebookLikeCount": 179, "facebookCommentCount": 89}, {"facebookShareCount": 180, "viewCount": 7864, "importance": 5, "colour": "#2de58d", "twitterShareCount": 93, "commentCount": 15, "headline": "French police investigate mystery drone flights over central Paris", "publishedAt": 1424844000000, "url": "id21", "facebookLikeCount": 116, "facebookCommentCount": 52}, {"facebookShareCount": 200, "viewCount": 3360, "importance": 7, "colour": "#e52d6a", "twitterShareCount": 114, "commentCount": 72, "headline": "French police investigate mystery drone flights over central Paris", "publishedAt": 1424865600000, "url": "id22", "facebookLikeCount": 840, "facebookCommentCount": 28}, {"facebookShareCount": 120, "viewCount": 9312, "importance": 7, "colour": "#e5bc2d", "twitterShareCount": 373, "commentCount": 30, "headline": "Pauline Fisk obituary", "publishedAt": 1424887200000, "url": "id23", "facebookLikeCount": 569, "facebookCommentCount": 16}, {"facebookShareCount": 104, "viewCount": 202, "importance": 7, "colour": "#8fe52d", "twitterShareCount": 112, "commentCount": 48, "headline": "Letter: Oliver Rackham's winning ways", "publishedAt": 1424908800000, "url": "id24", "facebookLikeCount": 363, "facebookCommentCount": 53}, {"facebookShareCount": 49, "viewCount": 6497, "importance": 10, "colour": "#302de5", "twitterShareCount": 436, "commentCount": 80, "headline": "Pauline Fisk obituary", "publishedAt": 1424930400000, "url": "id25", "facebookLikeCount": 482, "facebookCommentCount": 10}, {"facebookShareCount": 83, "viewCount": 1130, "importance": 7, "colour": "#5c2de5", "twitterShareCount": 73, "commentCount": 28, "headline": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "publishedAt": 1424952000000, "url": "id26", "facebookLikeCount": 273, "facebookCommentCount": 79}, {"facebookShareCount": 139, "viewCount": 9845, "importance": 4, "colour": "#69e52d", "twitterShareCount": 82, "commentCount": 35, "headline": "Pauline Fisk obituary", "publishedAt": 1424973600000, "url": "id27", "facebookLikeCount": 222, "facebookCommentCount": 75}];
 
 	d3.select("#bubblegraph_zoom_in").on("click", function(){});
 	d3.select("#bubblegraph_zoom_out").on("click", function(){});
@@ -75,8 +83,8 @@
 
 	BubbleGraphObject.prototype.setData = function(d) {
 		this.data = d;
-		var to = d3.max(d, function(v){ return v.time; })
-		var from = to - 86400*7;
+		var to = d3.max(d, function(v){ return v.publishedAt; })
+		var from = to - 86400000*7;
 		this.zoomToRange(from, to);
 	}
 
@@ -97,30 +105,30 @@
 	BubbleGraphObject.prototype.zoomToRange = function(from, to) {
 		this.from = from
 		this.to = to
-		var fromDate = new Date(from*1000);
-		var toDate = new Date(to*1000);
-		var pixelsPerSec = 600.0/(to-from);
+		var fromDate = new Date(from);
+		var toDate = new Date(to);
+		var pixelsPerNanosec = 600.0/(to-from);
 		var markerGap = 50
-		var secsPerMarkerGap = ((to-from)/600.0)*markerGap;
+		var nanosecsPerMarkerGap = ((to-from)/600.0)*markerGap;
 
 		var startMarker = from
 		var markerIncrement = 1
 		var markerFmt = null
 		var monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 		// choose the right scale for markers
-		if ((secsPerMarkerGap) <= 3600) {
+		if ((nanosecsPerMarkerGap) <= 3600000) {
 			// 1 hour
-			markerIncrement = 3600;
+			markerIncrement = 3600000;
 			markerFmt = function(d){ return d.getHours()+":00"; }
-		} else if ((secsPerMarkerGap <= 86400)) {
-			markerIncrement = 86400;
+		} else if ((nanosecsPerMarkerGap <= 86400000)) {
+			markerIncrement = 86400000;
 			markerFmt = function(d){ return d.getDate()+" "+monthName[d.getMonth()]; }
-		} else if ((secsPerMarkerGap <= 2628000)) { // roughly a month
-			markerIncrement = 2628000
+		} else if ((nanosecsPerMarkerGap <= 2628000000)) { // roughly a month
+			markerIncrement = 2628000000
 			markerFmt = function(d){ return monthName[d.getMonth()]+" "+d.getFullYear(); }
 		} else {
-			markerIncrement = 31536000 
-			// TODO: multiply by 10 until it's wide enough
+			markerIncrement = 31536000000 
+			while(nanosecsPerMarkerGap > markerIncrement) markerIncrement *= 10;
 			markerFmt = function(d){ return d.getFullYear()+"" }
 		}
 		startMarker = Math.ceil((from-1)/markerIncrement)*markerIncrement
@@ -132,12 +140,12 @@
 		}
 		console.log("markers = "+markers);
 
-		var data = this.data.filter(function(v){return (v.time>=from && v.time<=to);});
+		var data = this.data.filter(function(v){return (v.publishedAt>=from && v.publishedAt<=to);});
 		var svg = this.svg;
-		var circles = this.svg.selectAll("circle").data(data, function(d){return d.id;})
+		var circles = this.svg.selectAll("circle").data(data, function(d){return d.url;})
 				//
 		circles.enter().append("circle")
-			.attr("cx", function(d,i){return (d.time-from)*pixelsPerSec;})
+			.attr("cx", function(d,i){return (d.publishedAt-from)*pixelsPerNanosec;})
 			.attr("r", function(d){return d.importance*4;})
 			.attr("fill", function(d){return d.colour;})
 			.attr("opacity", 0.7)
@@ -146,14 +154,23 @@
 				var cr = svg[0][0].getBoundingClientRect();
 				d3.select(this).transition().attr("r", d.importance*8);
 				var infobox = d3.select("#bubbleinfo");
-				d3.select("#bubbleinfo__title").text(d.title);
-				infobox.style("display", "block").style("left", (cr.left + i*20 - 10)).style("top", cr.top+100);
+				d3.select("#bubbleinfo__title").text(d.headline);
+				d3.select("#bubbleinfo__views").text(d.viewCount);
+				d3.select("#bubbleinfo__likes").text(d.facebookLikeCount);
+				d3.select("#bubbleinfo__comments").text(d.commentCount);
+				d3.select("#bubbleinfo__fb").text(d.facebookShareCount);
+				d3.select("#bubbleinfo__twitter").text(d.twitterShareCount);
+				infobox.style("display", "block").style("left", (cr.left + i*20 - 10)).style("top", cr.top+10);
+				infobox.transition().style("opacity", "1.0");
 			})
 			.on("mouseout", function(d, i){
 				d3.select(this).transition().attr("r", d.importance*4);
+				var infobox = d3.select("#bubbleinfo");
+				infobox.transition().style("opacity", "0.0");
+				//infobox.style("display", "none")
 			});
 		circles.transition().duration(300)
-			.attr("cx", function(d,i){return (d.time-from)*pixelsPerSec;})
+			.attr("cx", function(d,i){return (d.publishedAt-from)*pixelsPerNanosec;})
 			.attr("r", function(d){return d.importance*4;})
 			.attr("fill", function(d){return d.colour;});
 		circles.exit().remove();
@@ -161,25 +178,25 @@
 		dashes.enter()
 			.append("rect")
 				.attr("class", "marker")
-				.attr("x", function(d,i) { return (d-from)*pixelsPerSec; })
-				.attr("y", 95)
+				.attr("x", function(d,i) { return (d-from)*pixelsPerNanosec; })
+				.attr("y", 180)
 				.attr("width", 2)
 				.attr("height", 10)
 				.attr("fill", "#777")
 				.attr("id", function(d){return "mkr"+d;});
 		dashes.transition().duration(300)
-			.attr("x", function(d,i) { return (d-from)*pixelsPerSec; });			
+			.attr("x", function(d,i) { return (d-from)*pixelsPerNanosec; });			
 		dashes.exit().remove();
 
 		var labels = this.svg.selectAll("text.marker").data(markers, function(d){return d;});
 		labels.enter()
 			.append("text")
 				.attr("class", "marker")
-				.attr("dx", function(d,i) { return (d-from)*pixelsPerSec; })
-				.text(function(d){return markerFmt(new Date(d*1000)); })
-				.attr("dy", 110);
+				.attr("dx", function(d,i) { return (d-from)*pixelsPerNanosec; })
+				.text(function(d){return markerFmt(new Date(d)); })
+				.attr("dy", 190);
 		labels.transition().duration(300)
-				.attr("dx", function(d,i) { return (d-from)*pixelsPerSec; });
+				.attr("dx", function(d,i) { return (d-from)*pixelsPerNanosec; });
 		labels.exit().remove();
 
 	}
