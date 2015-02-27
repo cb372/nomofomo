@@ -15,58 +15,12 @@ BubbleGraphObject.prototype.setData = function(d) {
   this.zoomToRange(from, to);
 }
 
-BubbleGraphObject.prototype.zoomIn = function() {
-  var span = this.to - this.from, midpoint = (this.from + this.to)/2;
-  var nfrom = midpoint - span/4;
-  var nto = midpoint + span/4;
-  this.zoomToRange(nfrom, nto)
-}
-
-BubbleGraphObject.prototype.zoomOut = function() {
-  var span = this.to - this.from, midpoint = (this.from + this.to)/2;
-  var nfrom = midpoint - span;
-  var nto = midpoint + span;
-  this.zoomToRange(nfrom, nto)
-}
-
-BubbleGraphObject.prototype.zoomToRange = function(from, to) {
-  this.from = from
-  this.to = to
-  var fromDate = new Date(from);
-  var toDate = new Date(to);
+BubbleGraphObject.prototype.refresh = function() {
+  var from = this.from;
+  var to = this.to;
+  var markers = this.markers;
+  var markerFmt = this.markerFmt;
   var pixelsPerNanosec = 1100.0/(to-from);
-  var markerGap = 50
-  var nanosecsPerMarkerGap = ((to-from)/600.0)*markerGap;
-
-  var startMarker = from
-  var markerIncrement = 1
-  var markerFmt = null
-  var monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  // choose the right scale for markers
-  if ((nanosecsPerMarkerGap) <= 3600000) {
-    // 1 hour
-    markerIncrement = 3600000;
-    markerFmt = function(d){ return d.getHours()+":00"; }
-  } else if ((nanosecsPerMarkerGap <= 86400000)) {
-    markerIncrement = 86400000;
-    markerFmt = function(d){ return d.getDate()+" "+monthName[d.getMonth()]; }
-  } else if ((nanosecsPerMarkerGap <= 2628000000)) { // roughly a month
-    markerIncrement = 2628000000
-    markerFmt = function(d){ return monthName[d.getMonth()]+" "+d.getFullYear(); }
-  } else {
-    markerIncrement = 31536000000 
-    while(nanosecsPerMarkerGap > markerIncrement) markerIncrement *= 10;
-    markerFmt = function(d){ return d.getFullYear()+"" }
-  }
-  startMarker = Math.ceil((from-1)/markerIncrement)*markerIncrement
-
-
-  var markers = [];
-  for(var i=startMarker; i <= to; i += markerIncrement) {
-    markers.push(i);
-  }
-  console.log("markers = "+markers);
-
   var data = this.data.filter(function(v){return (v.publishedAt>=from && v.publishedAt<=to);});
   var svg = this.svg;
   var circles = this.svg.selectAll("circle").data(data, function(d){return d.url;})
@@ -133,6 +87,79 @@ BubbleGraphObject.prototype.zoomToRange = function(from, to) {
       .attr("dx", function(d,i) { return (d-from)*pixelsPerNanosec; });
   labels.exit().remove();
 
+}
+
+BubbleGraphObject.prototype.zoomIn = function() {
+  var span = this.to - this.from, midpoint = (this.from + this.to)/2;
+  var nfrom = midpoint - span/4;
+  var nto = midpoint + span/4;
+  this.zoomToRange(nfrom, nto);
+   
+  var self = this;
+  $.ajax(ajaxUrl + '?from=' + nfrom + '&to=' + nto, {
+    success: function(data) {
+      console.log(data);
+      self.data = data;
+      self.refresh();
+    }
+  });
+}
+
+BubbleGraphObject.prototype.zoomOut = function() {
+  var span = this.to - this.from, midpoint = (this.from + this.to)/2;
+  var nfrom = midpoint - span;
+  var nto = midpoint + span;
+  this.zoomToRange(nfrom, nto)
+   
+  var self = this;
+  $.ajax(ajaxUrl + '?from=' + nfrom + '&to=' + nto, {
+    success: function(data) {
+      console.log(data);
+      self.data = data;
+      self.refresh();
+    }
+  });
+}
+
+BubbleGraphObject.prototype.zoomToRange = function(from, to) {
+  this.from = from;
+  this.to = to;
+  var fromDate = new Date(from);
+  var toDate = new Date(to);
+  var markerGap = 50
+  var nanosecsPerMarkerGap = ((to-from)/600.0)*markerGap;
+
+  var startMarker = from
+  var markerIncrement = 1
+  var markerFmt = null
+  var monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  // choose the right scale for markers
+  if ((nanosecsPerMarkerGap) <= 3600000) {
+    // 1 hour
+    markerIncrement = 3600000;
+    markerFmt = function(d){ return d.getHours()+":00"; }
+  } else if ((nanosecsPerMarkerGap <= 86400000)) {
+    markerIncrement = 86400000;
+    markerFmt = function(d){ return d.getDate()+" "+monthName[d.getMonth()]; }
+  } else if ((nanosecsPerMarkerGap <= 2628000000)) { // roughly a month
+    markerIncrement = 2628000000
+    markerFmt = function(d){ return monthName[d.getMonth()]+" "+d.getFullYear(); }
+  } else {
+    markerIncrement = 31536000000 
+    while(nanosecsPerMarkerGap > markerIncrement) markerIncrement *= 10;
+    markerFmt = function(d){ return d.getFullYear()+"" }
+  }
+  startMarker = Math.ceil((from-1)/markerIncrement)*markerIncrement
+
+  var markers = [];
+  for(var i=startMarker; i <= to; i += markerIncrement) {
+    markers.push(i);
+  }
+  console.log("markers = "+markers);
+  this.markers = markers;
+  this.markerFmt = markerFmt;
+
+  this.refresh();
 }
 
 var graph = new BubbleGraphObject("#bubblegraph_svg");

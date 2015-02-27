@@ -19,7 +19,7 @@ router.get('/timeline.json', function(req, res, next) {
 });
 
 router.get('/timeline-isis.json', function(req, res, next) {
-  timeline.getIsisTimeline()
+  timeline.getIsisTimeline(req.query.from, req.query.to)
   .then(function(articles) {
     res.json(articles);
   })
