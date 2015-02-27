@@ -29,9 +29,19 @@
 		position: absolute;
 		left: 10px;
 		top: 10px;
-			
+		background-color: #f0f0f0;
 	}
-
+	div#bubblegraph_zoom .zoombutton {
+		cursor:pointer;
+		color: #333;
+		background-color: #f0f0f0;
+		padding: 4px;
+		text-align: center;
+	}
+	div#bubblegraph_zoom .zoombutton:hover {
+		color: #000;
+		background-color: #ccc;
+	}
 
 </style>
 </head>
@@ -52,7 +62,41 @@
 <script type="text/javascript">
 	var dummyAllData = [{"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#e5892d", "time": 1424131200, "id": "id00"}, {"title": "Pauline Fisk obituary", "importance": 5, "text": "test", "colour": "#e52d3b", "time": 1424152800, "id": "id01"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 8, "text": "test", "colour": "#aa2de5", "time": 1424174400, "id": "id02"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 4, "text": "test", "colour": "#2d53e5", "time": 1424196000, "id": "id03"}, {"title": "Pauline Fisk obituary", "importance": 3, "text": "test", "colour": "#3be52d", "time": 1424217600, "id": "id04"}, {"title": "Pauline Fisk obituary", "importance": 9, "text": "test", "colour": "#e5b22d", "time": 1424239200, "id": "id05"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 10, "text": "test", "colour": "#2de5d2", "time": 1424260800, "id": "id06"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 4, "text": "test", "colour": "#2d6ee5", "time": 1424282400, "id": "id07"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 10, "text": "test", "colour": "#d9e52d", "time": 1424304000, "id": "id08"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 8, "text": "test", "colour": "#e12de5", "time": 1424325600, "id": "id09"}, {"title": "Emma Thompson and Greg Wise: a new mission for the latter-day Chartists", "importance": 0, "text": "test", "colour": "#2dcae5", "time": 1424347200, "id": "id0a"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 2, "text": "test", "colour": "#2db8e5", "time": 1424368800, "id": "id0b"}, {"title": "Pauline Fisk obituary", "importance": 4, "text": "test", "colour": "#2de553", "time": 1424390400, "id": "id0c"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 9, "text": "test", "colour": "#2de53f", "time": 1424412000, "id": "id0d"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 4, "text": "test", "colour": "#3ce52d", "time": 1424433600, "id": "id0e"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 8, "text": "test", "colour": "#e52dca", "time": 1424455200, "id": "id0f"}, {"title": "Pauline Fisk obituary", "importance": 6, "text": "test", "colour": "#b92de5", "time": 1424476800, "id": "id10"}, {"title": "Pauline Fisk obituary", "importance": 4, "text": "test", "colour": "#2de555", "time": 1424498400, "id": "id11"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 3, "text": "test", "colour": "#2d69e5", "time": 1424520000, "id": "id12"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 1, "text": "test", "colour": "#2d90e5", "time": 1424541600, "id": "id13"}, {"title": "Net neutrality: FCC votes on the future of the internet", "importance": 0, "text": "test", "colour": "#54e52d", "time": 1424563200, "id": "id14"}, {"title": "Arsenal must get back to basics after Champions League lesson from Monaco | Jonathan Wilson", "importance": 9, "text": "test", "colour": "#e52d75", "time": 1424584800, "id": "id15"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 10, "text": "test", "colour": "#e5c12d", "time": 1424606400, "id": "id16"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 0, "text": "test", "colour": "#e52d80", "time": 1424628000, "id": "id17"}, {"title": "French police investigate mystery drone flights over central Paris", "importance": 10, "text": "test", "colour": "#2d42e5", "time": 1424649600, "id": "id18"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#e52dc3", "time": 1424671200, "id": "id19"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#2d59e5", "time": 1424692800, "id": "id1a"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 4, "text": "test", "colour": "#2d95e5", "time": 1424714400, "id": "id1b"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 7, "text": "test", "colour": "#2dd3e5", "time": 1424736000, "id": "id1c"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 3, "text": "test", "colour": "#e5982d", "time": 1424757600, "id": "id1d"}, {"title": "Milan fashion week sees brands offer a more restrained glamour", "importance": 0, "text": "test", "colour": "#2de558", "time": 1424779200, "id": "id1e"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 10, "text": "test", "colour": "#2d4ce5", "time": 1424800800, "id": "id1f"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 10, "text": "test", "colour": "#e57b2d", "time": 1424822400, "id": "id20"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 10, "text": "test", "colour": "#5a2de5", "time": 1424844000, "id": "id21"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 9, "text": "test", "colour": "#9e2de5", "time": 1424865600, "id": "id22"}, {"title": "Letter: Oliver Rackham's winning ways", "importance": 5, "text": "test", "colour": "#2d79e5", "time": 1424887200, "id": "id23"}, {"title": "Coutts bank under investigation over Swiss tax evasion", "importance": 0, "text": "test", "colour": "#bee52d", "time": 1424908800, "id": "id24"}, {"title": "It Follows review - sexual dread fuels a modern horror classic", "importance": 8, "text": "test", "colour": "#2dc3e5", "time": 1424930400, "id": "id25"}, {"title": "Patients should have right to choose where they die, says care inquiry", "importance": 4, "text": "test", "colour": "#e5bc2d", "time": 1424952000, "id": "id26"}, {"title": "Pauline Fisk obituary", "importance": 6, "text": "test", "colour": "#732de5", "time": 1424973600, "id": "id27"}];
 
-	var showRange = function(from, to) {
+	d3.select("#bubblegraph_zoom_in").on("click", function(){});
+	d3.select("#bubblegraph_zoom_out").on("click", function(){});
+
+
+	// The bubble graph UI object
+
+	function BubbleGraphObject(svgSelector) {
+		this.svg = d3.select(svgSelector);
+		this.data = null
+	}
+
+	BubbleGraphObject.prototype.setData = function(d) {
+		this.data = d;
+		var to = d3.max(d, function(v){ return v.time; })
+		var from = to - 86400*7;
+		this.zoomToRange(from, to);
+	}
+
+	BubbleGraphObject.prototype.zoomIn = function() {
+		var span = this.to - this.from, midpoint = (this.from + this.to)/2;
+		var nfrom = midpoint - span/4;
+		var nto = midpoint + span/4;
+		this.zoomToRange(nfrom, nto)
+	}
+
+	BubbleGraphObject.prototype.zoomOut = function() {
+		var span = this.to - this.from, midpoint = (this.from + this.to)/2;
+		var nfrom = midpoint - span;
+		var nto = midpoint + span;
+		this.zoomToRange(nfrom, nto)
+	}
+
+	BubbleGraphObject.prototype.zoomToRange = function(from, to) {
+		this.from = from
+		this.to = to
 		var fromDate = new Date(from*1000);
 		var toDate = new Date(to*1000);
 		var pixelsPerSec = 600.0/(to-from);
@@ -80,7 +124,6 @@
 			markerFmt = function(d){ return d.getFullYear()+"" }
 		}
 		startMarker = Math.ceil((from-1)/markerIncrement)*markerIncrement
-		//console.log("markerFmt(from) = "+markerFmt(from))
 
 
 		var markers = [];
@@ -89,27 +132,33 @@
 		}
 		console.log("markers = "+markers);
 
-		var data = dummyAllData.filter(function(v){return (v.time>=from && v.time<=to);});
-		var svg = d3.select("svg#bubblegraph_svg");
-		svg.selectAll("circle").data(data).enter()
-			.append("circle")
-				.attr("cx", function(d,i){return i*20;})
-				.attr("cy", 100)
-				.attr("r", function(d){return d.importance*4;})
-				.attr("fill", function(d){return d.colour;})
-				.attr("opacity", 0.7)
-				.on("mouseover", function(d, i){
-					var cr = svg[0][0].getBoundingClientRect();
-					d3.select(this).transition().attr("r", d.importance*8);
-					var infobox = d3.select("#bubbleinfo");
-					d3.select("#bubbleinfo__title").text(d.title);
-					infobox.style("display", "block").style("left", (cr.left + i*20 - 10)).style("top", cr.top+100);
-				})
-				.on("mouseout", function(d, i){
-					d3.select(this).transition().attr("r", d.importance*4);
-				})
-				;
-		svg.selectAll("rect.marker").data(markers).enter()
+		var data = this.data.filter(function(v){return (v.time>=from && v.time<=to);});
+		var svg = this.svg;
+		var circles = this.svg.selectAll("circle").data(data, function(d){return d.id;})
+				//
+		circles.enter().append("circle")
+			.attr("cx", function(d,i){return (d.time-from)*pixelsPerSec;})
+			.attr("r", function(d){return d.importance*4;})
+			.attr("fill", function(d){return d.colour;})
+			.attr("opacity", 0.7)
+			.attr("cy", 100)
+			.on("mouseover", function(d, i){
+				var cr = svg[0][0].getBoundingClientRect();
+				d3.select(this).transition().attr("r", d.importance*8);
+				var infobox = d3.select("#bubbleinfo");
+				d3.select("#bubbleinfo__title").text(d.title);
+				infobox.style("display", "block").style("left", (cr.left + i*20 - 10)).style("top", cr.top+100);
+			})
+			.on("mouseout", function(d, i){
+				d3.select(this).transition().attr("r", d.importance*4);
+			});
+		circles.transition().duration(300)
+			.attr("cx", function(d,i){return (d.time-from)*pixelsPerSec;})
+			.attr("r", function(d){return d.importance*4;})
+			.attr("fill", function(d){return d.colour;});
+		circles.exit().remove();
+		var dashes = this.svg.selectAll("rect.marker").data(markers, function(d){return d;});
+		dashes.enter()
 			.append("rect")
 				.attr("class", "marker")
 				.attr("x", function(d,i) { return (d-from)*pixelsPerSec; })
@@ -118,14 +167,28 @@
 				.attr("height", 10)
 				.attr("fill", "#777")
 				.attr("id", function(d){return "mkr"+d;});
-		svg.selectAll("text.marker").data(markers).enter()
+		dashes.transition().duration(300)
+			.attr("x", function(d,i) { return (d-from)*pixelsPerSec; });			
+		dashes.exit().remove();
+
+		var labels = this.svg.selectAll("text.marker").data(markers, function(d){return d;});
+		labels.enter()
 			.append("text")
 				.attr("class", "marker")
 				.attr("dx", function(d,i) { return (d-from)*pixelsPerSec; })
-				.attr("dy", 110)
 				.text(function(d){return markerFmt(new Date(d*1000)); })
+				.attr("dy", 110);
+		labels.transition().duration(300)
+				.attr("dx", function(d,i) { return (d-from)*pixelsPerSec; });
+		labels.exit().remove();
 
 	}
-	showRange(1424131200, 1424973600);
+
+	var graph = new BubbleGraphObject("#bubblegraph_svg")
+	graph.setData(dummyAllData)
+	//graph.zoomToRange(1424131200, 1424973600);
+
+	d3.select("#bubblegraph_zoom_in").on("click", function(){graph.zoomIn();});
+	d3.select("#bubblegraph_zoom_out").on("click", function(){graph.zoomOut();});
 </script>
 </html>
