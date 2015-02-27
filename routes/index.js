@@ -6,7 +6,7 @@ var capi = require('../lib/capi.js');
 var timeline = require('../lib/timeline.js');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/timeline.json', function(req, res, next) {
   timeline.getTimeline()
   .then(function(articles) {
     res.json(articles);
